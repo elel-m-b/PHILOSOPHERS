@@ -9,5 +9,8 @@
 int main(int ac, char **av)
 {
     int     pid = fork();
-    printf ("Hello world\n");
+    if (pid == 0)
+        printf ("Hello world from child\n");
+    else
+        printf ("Hello world form parent\n");
 }
