@@ -1,15 +1,18 @@
-#include <signal.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 int main()
 {
+    printf ("the parent process main process is %d\n", getpid());
     int id = fork();
     int id2 = fork();
     int id3 = fork();
 
-    printf("child pid %d  Parent pid %d\n", getpid(), getppid());
-    fflush(stdout);   
+    printf("PID: %d | PPID: %d | id: %d | id2: %d | id3: %d\n",  getpid(), getppid(), id, id2, id3);
+
+    while (1)
+        ;
+
     return 0;
 }
