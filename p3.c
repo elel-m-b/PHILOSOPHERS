@@ -2,21 +2,44 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <sys/wait.h>
+// int     identify_process(void)
+// {
+//     int pid = fork();
+//     if (pid == 0)
+//         return (0);
+//     return (1);
+// }
 
+// int main(void)
+// {
+//     int     a = identify_process();
+//     if (a == 1)
+//         printf ("we are in parent\n");
+//     else 
+//         printf ("we are in child process\n");
+// }
 
-int     identify_process(void)
+void        wait_for_child(void)
 {
-    int pid = fork();
+    int     a;
+    a = 0;
+    int  pid = fork();
     if (pid == 0)
-        return (0);
-    return (1);
+    {
+        while (1)
+            printf ("Hello world from %d\n", pid);
+        printf ("child is finished\n");
+        exit(0);
+    }
+    else
+    {
+        int pid_of_child = wait(NULL);
+        printf ("Hello I am parent and pid of child is %d\n", pid_of_child);
+    }
 }
 
 int main(void)
 {
-    int     a = identify_process();
-    if (a == 1)
-        printf ("we are in parent\n");
-    else 
-        printf ("we are in child process\n");
+    wait_for_child();
 }
