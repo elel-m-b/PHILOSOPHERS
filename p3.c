@@ -20,26 +20,42 @@
 //         printf ("we are in child process\n");
 // }
 
-void        wait_for_child(void)
+// void        wait_for_child(void)
+// {
+//     int     a;
+//     a = 0;
+//     int  pid = fork();
+//     if (pid == 0)
+//     {
+//         while (1)
+//             printf ("Hello world from %d\n", pid);
+//         printf ("child is finished\n");
+//         exit(0);
+//     }
+//     else
+//     {
+//         int pid_of_child = wait(NULL);
+//         printf ("Hello I am parent and pid of child is %d\n", pid_of_child);
+//     }
+// }
+
+// int main(void)
+// {
+//     wait_for_child();
+// }
+
+int     get_child_exit_code(void)
 {
-    int     a;
-    a = 0;
-    int  pid = fork();
+    printf ("%d\n", getpid());
+    int     pid = fork();
+    int     pid2 = fork();
+    printf ("%d\n", pid);
     if (pid == 0)
-    {
-        while (1)
-            printf ("Hello world from %d\n", pid);
-        printf ("child is finished\n");
-        exit(0);
-    }
-    else
-    {
-        int pid_of_child = wait(NULL);
-        printf ("Hello I am parent and pid of child is %d\n", pid_of_child);
-    }
+        printf ("I am child %d\n", pid);
+    return (pid);
 }
 
-int main(void)
+int main()
 {
-    wait_for_child();
+    get_child_exit_code();
 }
