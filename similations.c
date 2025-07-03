@@ -9,15 +9,14 @@ typedef     struct      s_table
     int     td;
     int     te;
     int     ts;
+    pthread_mutex_t	*forks;
 }t_table;
 
 typedef     struct      s_philo
 {
     int     id;
     t_table     *table;
-    int     left_fork;
     pthread_t       *threads;
-    int     right_fork;
 }t_philo;
 
 int     ft_numberlen(char *s)
@@ -101,11 +100,11 @@ void        init_table(t_philo  *philos)
 {
     int     i;
     i = 0;
-    philos->threads = malloc(sizeof(t_philo) * philos->table->nph);
+    philos->threads = malloc(sizeof(pthread_t) * philos->table->nph);
     while(i < philos->table->nph)
     {
-        philos->id = i;
-        pthread_create(&philos->threads[i], NULL, routine, &philos->id);
+        int     id = i;
+        pthread_create(&philos->threads[i], NULL, routine, &id);
         i++;
     }
     i = 0;
@@ -119,11 +118,12 @@ void        init_table(t_philo  *philos)
 int main(int        ac, char **av)
 {
     t_table    table;
-    t_philo     philos;
+    t_philo     *philos;
     if (check_args(ac))
         return (1);
     if (parsing_args(av,&table))
         return (1);
-    init_table(&philos);
+    philos = malloc(sizeof(t_philo) * table.nph);
+    table.forks = malloc(sizeof(pthread_mutex_t) * table.nph);
     return (0);
 }
