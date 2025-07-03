@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <unistd.h>
+
 typedef     struct      s_table
 {
     int     nph;
@@ -9,6 +10,15 @@ typedef     struct      s_table
     int     te;
     int     ts;
 }t_table;
+
+typedef     struct      s_philo
+{
+    int     id;
+    t_table     *table;
+    int     left_fork;
+    pthread_t       *threads;
+    int     right_fork;
+}t_philo;
 
 int     ft_numberlen(char *s)
 {
@@ -28,7 +38,7 @@ int     check_args(int ac)
 {
     if (ac != 6 && ac != 5)
     {
-        put_errro("Invalid number of argument\n");
+        put_errro("Error\n");
         return (1);
     }
     return (0);
@@ -56,7 +66,7 @@ int	ft_atoll(char	*number)
 	{
         if (number[i] < '0' || number[i] > '9')
         {
-            put_errro("Invalid parametre\n");
+            put_errro("Error\n");
             return (0);
         }
 		res = res * 10 + (number[i] - '0');
@@ -71,20 +81,49 @@ int     parsing_args(char **av, t_table *table)
     table->td = ft_atoll(av[2]);
     table->te = ft_atoll(av[3]);
     table->ts = ft_atoll(av[4]);
-    if (table->nph == 0 || table->td < 0 || table->te < 0 || table->ts < 0)
+    if (table->nph <= 0 || table->td < 0 || table->te < 0 || table->ts < 0)
     {
-        put_errro ("Invalid argument\n");
+        put_errro ("Error\n");
         return (1);
     }
     return (0);
 }
 
+void        *routine(void *arg)
+{
+    int     id;
+    id = *(int *)(arg);
+    printf ("Hello from philo %d\n", id);
+    return (NULL);
+}
+
+void        init_table(t_philo  *philos)
+{
+    int     i;
+    i = 0;
+    philos->threads = malloc(sizeof(t_philo) * philos->table->nph);
+    while(i < philos->table->nph)
+    {
+        philos->id = i;
+        pthread_create(&philos->threads[i], NULL, routine, &philos->id);
+        i++;
+    }
+    i = 0;
+    while (i < philos->table->nph)
+    {
+        pthread_join(philos->threads[i], NULL);
+        i++;
+    }
+}
+
 int main(int        ac, char **av)
 {
     t_table    table;
+    t_philo     philos;
     if (check_args(ac))
         return (1);
     if (parsing_args(av,&table))
         return (1);
+    init_table(&philos);
     return (0);
 }
