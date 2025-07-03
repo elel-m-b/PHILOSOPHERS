@@ -3,7 +3,10 @@
 #include <unistd.h> 
 #include <signal.h>
 #include <stdlib.h>
-
+// check args
+// parse args
+// err_writing
+// init philo table
 typedef struct s_table
 {
     int             number_of_philo;
