@@ -43,15 +43,8 @@ int	ft_atoll(char	*number)
 	i = 0;
 	signe = 1;
 	res = 0;
-    while (number[i])
-    {
-        if (number[i] < '0' || number[i] > '9')
-            put_errro("Invalid parametre\n");
-        printf ("| %c\n", number[i]);
+    while (number[i] == ' ' || (number[i] >= 9 && number[i] <= 13))
         i++;
-    }
-	while (number[i] == ' ' || (number[i] >= 9 && number[i] <= 13))
-		i++;
 	if (number[i] == '-')
 	{
 		signe = -1;
@@ -59,8 +52,13 @@ int	ft_atoll(char	*number)
 	}
 	else if (number[i] == '+')
 		i++;
-	while (number[i] >= '0' && number[i] <= '9')
+	while (number[i])
 	{
+        if (number[i] < '0' || number[i] > '9')
+        {
+            put_errro("Invalid parametre\n");
+            return (0);
+        }
 		res = res * 10 + (number[i] - '0');
 		i++;
 	}
@@ -73,10 +71,6 @@ int     parsing_args(char **av, t_table *table)
     table->td = ft_atoll(av[2]);
     table->te = ft_atoll(av[3]);
     table->ts = ft_atoll(av[4]);
-    printf ("table.np == %d\n", table->nph);
-    printf ("table.td == %d\n", table->td);
-    printf ("table.te == %d\n", table->te);
-    printf ("table.ts == %d\n", table->ts);
     if (table->nph == 0 || table->td < 0 || table->te < 0 || table->ts < 0)
     {
         put_errro ("Invalid argument\n");
