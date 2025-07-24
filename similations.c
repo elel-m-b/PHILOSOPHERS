@@ -15,6 +15,8 @@ typedef     struct      s_table
 typedef     struct      s_philo
 {
     int     id;
+    pthread_mutex_t		*left_fork;
+	pthread_mutex_t		*right_fork;
     t_table     *table;
     pthread_t       *threads;
 }t_philo;
@@ -88,31 +90,44 @@ int     parsing_args(char **av, t_table *table)
     return (0);
 }
 
-void        *routine(void *arg)
+void *routine(void *arg)
 {
-    int     id;
-    id = *(int *)(arg);
-    printf ("Hello from philo %d\n", id);
+    t_philo *philo = (t_philo *)arg;
+    printf("Hello from philo %d\n", philo->id);
     return (NULL);
 }
 
-void        init_table(t_philo  *philos)
+void init_philosophers(t_philo *philos, t_table *table)
 {
     int     i;
     i = 0;
-    philos->threads = malloc(sizeof(pthread_t) * philos->table->nph);
-    while(i < philos->table->nph)
+    while (i < table->nph)
     {
-        int     id = i;
-        pthread_create(&philos->threads[i], NULL, routine, &id);
+        pthread_mutex_init(&(table->forks[i]), NULL);
+        philos[i].table = table;
+        philos->id = i + 1;
+        philos[i].right_fork = NULL;
+        philos[i].left_fork = NULL;
+    }
+    while (i < philos->table->nph)
+    {
+        pthread_create(&philos->threads[i], NULL, routine, &philos[i]);
         i++;
     }
+}
+void    wait_philosphers(t_philo *philos)
+{
+    int     i;
     i = 0;
     while (i < philos->table->nph)
     {
         pthread_join(philos->threads[i], NULL);
         i++;
     }
+}
+void        start_similation(t_philo *philos)
+{
+    return ;
 }
 
 int main(int        ac, char **av)
@@ -124,6 +139,16 @@ int main(int        ac, char **av)
     if (parsing_args(av,&table))
         return (1);
     philos = malloc(sizeof(t_philo) * table.nph);
+    if (!philos)
+        put_errro("malloc failed\n");
     table.forks = malloc(sizeof(pthread_mutex_t) * table.nph);
+    if (!table.forks)
+        put_errro("malloc failed\n");
+    philos->threads = malloc(sizeof(pthread_t) * table.nph);
+    if (!philos->threads)
+        put_errro("malloc failed\n");
+    init_philosophers(philos, &table);
+    start_similation(philos);
+    wait_philosphers(philos);
     return (0);
 }
