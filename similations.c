@@ -101,14 +101,17 @@ void init_philosophers(t_philo *philos, t_table *table)
 {
     int     i;
     i = 0;
+    int     n_philo = table->nph;
     while (i < table->nph)
     {
         pthread_mutex_init(&(table->forks[i]), NULL);
         philos[i].table = table;
         philos->id = i + 1;
-        philos[i].right_fork = NULL;
-        philos[i].left_fork = NULL;
+		philos[i].left_fork= &(table->forks[i]);
+        philos[i].right_fork = &(table->forks[(i + 1) % n_philo]);
+        i++;
     }
+    i = 0;
     while (i < philos->table->nph)
     {
         pthread_create(&philos->threads[i], NULL, routine, &philos[i]);
