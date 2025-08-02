@@ -102,6 +102,8 @@ void init_philosophers(t_philo *philos, t_table *table)
     int     i;
     i = 0;
     int     n_philo = table->nph;
+    philos->threads = malloc(sizeof(pthread_t) * table->nph);
+    table->forks = malloc(sizeof(pthread_mutex_t) * table->nph);
     while (i < table->nph)
     {
         pthread_mutex_init(&(table->forks[i]), NULL);
@@ -143,12 +145,6 @@ int main(int        ac, char **av)
         return (1);
     philos = malloc(sizeof(t_philo) * table.nph);
     if (!philos)
-        put_errro("malloc failed\n");
-    table.forks = malloc(sizeof(pthread_mutex_t) * table.nph);
-    if (!table.forks)
-        put_errro("malloc failed\n");
-    philos->threads = malloc(sizeof(pthread_t) * table.nph);
-    if (!philos->threads)
         put_errro("malloc failed\n");
     init_philosophers(philos, &table);
     start_similation(philos);

@@ -69,28 +69,29 @@
 //     printf ("the res are %d\n", *(int *)(i));
 // }
 
-void        *routine(void *arg)
-{
-    int    *num = malloc(4);
-    *num = 42;
-    return (num);
-}
-void        *routine_two(void *arg)
-{
-    int     *ha = (int *)(arg);
-    free(ha);
-    printf ("ok\n");
-    return (NULL);
-}
+// void        *routine(void *arg)
+// {
+    // int    *num = malloc(4);
+    // *num = 42;
+    // return (num);
+// }
+// void        *routine_two(void *arg)
+// {
+    // int     *ha = (int *)(arg);
+    // free(ha);
+    // printf ("ok\n");
+    // return (NULL);
+// // }
 
-int main()
-{
-    void *res;
-    pthread_t       t1;
-    pthread_t       t2;
-    pthread_create(&t1, NULL, routine, NULL);
-    pthread_join(t1, &res);
-    pthread_create(&t2, NULL, routine_two, res);
-    pthread_join(t2, NULL);
-    printf("the res are |%d|\n", *(int *)res);
-}
+// int main()
+// {
+    // void *res;
+    // pthread_t       t1;
+    // pthread_t       t2;
+    // pthread_create(&t1, NULL, routine, NULL);
+    // pthread_join(t1, &res);
+    // pthread_create(&t2, NULL, routine_two, res);
+    // pthread_join(t2, NULL);
+    // printf("the res are |%d|\n", *(int *)res);
+// }
+
