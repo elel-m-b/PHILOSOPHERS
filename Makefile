@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -pthread
 
 RM = rm -f
 
-SRCS = main.c parse.c routine.c similation.c utils.c
+SRCS = main.c parse.c routine.c utils.c
 
 OBJS = $(SRCS:.c=.o)
 

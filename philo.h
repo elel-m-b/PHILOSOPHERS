@@ -1,15 +1,26 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
+
 #include <unistd.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/time.h>
+#include <limits.h>
+
+#define FORK	"has taken a fork"
+#define SLEEP	"is sleeping"
+#define THINK	"is thinking"
+#define EAT		"is eating"
+#define DEAD	"died"
 
 typedef     struct      s_table
 {
-    int     nph;
-    int     td;
-    int     te;
-    int     ts;
+    long long     nph;
+    long long      td;
+    long long     te;
+    long long      ts;
+    int     is_death;
     pthread_mutex_t	*forks;
+    pthread_mutex_t	mutex_print;
 }t_table;
 
 typedef     struct      s_philo
@@ -18,6 +29,9 @@ typedef     struct      s_philo
     pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
     t_table     *table;
+    long long    last_meal_time;
+    int     eating;
+    long long start_time;
     pthread_t       *threads;
 }t_philo;
 
@@ -29,4 +43,5 @@ void init_philosophers(t_philo *philos, t_table *table);
 int     ft_numberlen(char *s);
 void        put_errro(char *err);
 int     check_args(int ac);
+long long	time_now(void);
 int	ft_atoll(char	*number);
