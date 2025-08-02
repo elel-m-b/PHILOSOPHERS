@@ -19,15 +19,15 @@ void        ft_eat(t_philo *philo)
 {
     philo->eating = 1;
     usleep(philo->table->te);
-    pthread_mutex_lock(&philo->left_fork);
+    pthread_mutex_lock(philo->left_fork);
     philo->last_meal_time = time_now();
-    pthread_mutex_unlock(&philo->right_fork);
+    pthread_mutex_unlock(philo->right_fork);
     print_message(philo->id, time_now() - philo->start_time , EAT);
 }
 void    ft_sleep(t_philo *philo)
 {
-    usleep(philo->table->ts);
     print_message(philo->id, time_now(), SLEEP);
+    usleep(philo->table->ts);
 }
 void    ft_think(t_philo *philo)
 {
