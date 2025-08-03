@@ -19,6 +19,7 @@ typedef     struct      s_table
     long long     te;
     long long      ts;
     int     is_death;
+    long long start_time;
     pthread_mutex_t	*forks;
     pthread_mutex_t	mutex_print;
 }t_table;
@@ -31,10 +32,9 @@ typedef     struct      s_philo
     t_table     *table;
     long long    last_meal_time;
     int     eating;
-    long long start_time;
     pthread_t       *threads;
 }t_philo;
-
+void	philog(t_philo *philo, const char *action);
 void        start_similation(t_philo *philos);
 void *routine(void *arg);
 int     parsing_args(char **av, t_table *table);

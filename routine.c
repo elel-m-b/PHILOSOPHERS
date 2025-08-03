@@ -1,8 +1,8 @@
 #include "philo.h"
 
-void        print_message(int       id, int time, char *message)
+void        print_message(int       id, long long  time, char *message)
 {
-    printf ("%d ", time);
+    printf ("%lld ", time);
     printf ("%d ", id);
     printf ("%s ", message);
     printf ("\n");
@@ -18,21 +18,22 @@ long long	time_now(void)
 void        ft_eat(t_philo *philo)
 {
     philo->eating = 1;
-    usleep(philo->table->te);
     pthread_mutex_lock(philo->left_fork);
+    print_message(philo->id, 1, FORK);
+    usleep(philo->table->te);
+    pthread_mutex_unlock(philo->left_fork);
     philo->last_meal_time = time_now();
-    pthread_mutex_unlock(philo->right_fork);
-    print_message(philo->id, time_now() - philo->start_time , EAT);
+    print_message(philo->id, time_now() - philo->table->start_time , EAT);
 }
 void    ft_sleep(t_philo *philo)
 {
-    print_message(philo->id, time_now(), SLEEP);
+    print_message(philo->id, time_now() - philo->table->start_time , SLEEP);
     usleep(philo->table->ts);
 }
 void    ft_think(t_philo *philo)
 {
     usleep(1000);
-    print_message (philo->id, time_now(), THINK);
+    print_message (philo->id, time_now() - philo->table->start_time , THINK);
 }
 void *routine(void *arg)
 {
@@ -41,7 +42,7 @@ void *routine(void *arg)
 
     table = philo->table;
     if (philo->id % 2 == 0)
-        usleep(1000);
+        usleep(100);
     while (!table->is_death)
     {
         ft_eat(philo);
@@ -57,7 +58,7 @@ void init_philosophers(t_philo *philos, t_table *table)
     int     n_philo = table->nph;
     philos->threads = malloc(sizeof(pthread_t) * table->nph);
     table->forks = malloc(sizeof(pthread_mutex_t) * table->nph);
-    philos->start_time = time_now();
+    philos->table->start_time = time_now();
     while (i < table->nph)
     {
         pthread_mutex_init(&(table->forks[i]), NULL);
