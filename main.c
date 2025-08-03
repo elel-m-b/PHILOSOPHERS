@@ -1,6 +1,17 @@
 #include "philo.h"
 
 
+void	destroy_all_mutexes(t_table *table)
+{
+	int	i = 0;
+
+	while (i < table->nph)
+	{
+		pthread_mutex_destroy(&table->forks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&table->mutex_print);
+}
 
 int main(int        ac, char **av)
 {
@@ -16,5 +27,6 @@ int main(int        ac, char **av)
     init_philosophers(philos, &table);
     start_similation(philos);
     wait_philosphers(philos);
+    destroy_all_mutexes(philos->table);
     return (0);
 }

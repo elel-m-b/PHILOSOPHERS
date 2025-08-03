@@ -8,7 +8,7 @@ void	philog(t_philo *philo, const char *action)
 
 	interval = 0;
 	id = philo->id;
-	start = philo->table->start_time;
+	start = philo->start_time;
 	interval = time_now() - start;
 	if (philo->table->is_death)
 		return ;
@@ -35,9 +35,10 @@ int	ft_eat(t_philo *philo)
 	pthread_mutex_lock(philo->left_fork);
 	philog(philo, FORK);
 	pthread_mutex_lock(philo->right_fork);
+    philog(philo, FORK);
 	philog(philo, EAT);
     philo->last_meal_time = time_now();
-    usleep(philo->table->te * 1000); 
+    usleep(philo->table->te); 
     pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
 	return (0);
@@ -75,12 +76,14 @@ void init_philosophers(t_philo *philos, t_table *table)
     int     n_philo = table->nph;
     philos->threads = malloc(sizeof(pthread_t) * table->nph);
     table->forks = malloc(sizeof(pthread_mutex_t) * table->nph);
+    philos->start_time = time_now();
     pthread_mutex_init(&(table->mutex_print), NULL);
     while (i < table->nph)
     {
         pthread_mutex_init(&(table->forks[i]), NULL);
         philos[i].table = table;
         philos[i].id = i + 1;
+        philos->table->is_death = 0;
 		philos[i].left_fork= &(table->forks[i]);
         philos[i].right_fork = &(table->forks[(i + 1) % n_philo]);
         philos[i].last_meal_time = time_now();

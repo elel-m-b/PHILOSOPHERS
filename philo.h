@@ -19,13 +19,13 @@ typedef     struct      s_table
     long long     te;
     long long      ts;
     int     is_death;
-    long long start_time;
     pthread_mutex_t	*forks;
     pthread_mutex_t	mutex_print;
 }t_table;
 
 typedef     struct      s_philo
 {
+    long long start_time;
     int     id;
     pthread_t       *threads;
     pthread_mutex_t		*left_fork;
