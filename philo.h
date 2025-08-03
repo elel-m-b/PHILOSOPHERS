@@ -27,12 +27,12 @@ typedef     struct      s_table
 typedef     struct      s_philo
 {
     int     id;
+    pthread_t       *threads;
     pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
     t_table     *table;
     long long    last_meal_time;
     int     eating;
-    pthread_t       *threads;
 }t_philo;
 void	philog(t_philo *philo, const char *action);
 void        start_similation(t_philo *philos);

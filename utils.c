@@ -56,22 +56,3 @@ int	ft_atoll(char	*number)
 	}
 	return (res * signe);
 }
-void	philog(t_philo *philo, const char *action)
-{
-	long long	interval;
-	long long	start;
-	int			id;
-
-	interval = 0;
-	id = philo->id;
-	start = philo->table->start_time;
-	interval = time_now() - start;
-	if (philo->table->is_death)
-		return ;
-	pthread_mutex_lock(&(philo->table->mutex_print));
-	if (!philo->table->is_death)
-		printf("%lld %d %s\n", interval, id, action);
-	if (*action == 'd')
-		philo->table->is_death = 1;
-	pthread_mutex_unlock(&(philo->table->mutex_print));
-}
