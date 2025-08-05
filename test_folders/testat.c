@@ -95,3 +95,29 @@
     // printf("the res are |%d|\n", *(int *)res);
 // }
 
+int     counter = 11;
+
+
+void        *routine(void *arg)
+{
+    int     i;
+    i = 0;
+    while (i < 10)
+    {
+        counter += 1;
+        i++;
+    }
+    return (NULL);
+}
+
+int main()
+{
+    pthread_t   t1;
+    pthread_t   t2;
+    pthread_create(&t1, NULL, routine, NULL);
+    pthread_join(t1, NULL);
+    pthread_join(t2, NULL);
+    printf ("the counter after finish the exec is %d\n", counter);
+}
+
+// ./philo 55 300 100 100

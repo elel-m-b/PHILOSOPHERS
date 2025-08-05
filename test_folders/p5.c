@@ -32,31 +32,3 @@
     7 - bonus good understanding
 */
 
-int main()
-{
-    
-}
-
-
-
-int	main(int argc, char *argv[])
-{
-	t_table	table;
-	t_philo	*p;
-
-	if (check_args(argc))
-		return (1);
-	if (parse_args(argv, &table))
-		return (1);
-	p = malloc(sizeof(t_philo) * table.philos);
-	if (!p)
-		return (err_w("Malloc failed"), -1);
-	table.forks = malloc(sizeof(pthread_mutex_t) * table.philos);
-	if (!table.forks)
-		return (err_w("Malloc failed"), free(p), -1);
-	if (init_philo(&table, p))
-		return (1);
-	if (nietzsche_party(&table))
-		return (1);
-	destroy_philo(&table);
-}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
+/*   Updated: 2025/08/05 21:58:09 by elel-m-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 long	time_now(void)
@@ -7,24 +19,25 @@ long	time_now(void)
     gettimeofday(&tv, NULL);
     return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
-void	philog(t_philo *philo, const char *action)
+void	philog(t_philo *philo, const char *message)
 {
-	long long	interval;
-	long long	start;
+	long	interval;
+	long	start;
 	int			id;
 
 	interval = 0;
 	id = philo->id;
 	start = philo->table->start_time;
 	interval = time_now() - start;
+    // usleep(philo->table->td * 1000);
 	pthread_mutex_lock(&(philo->table->mutex_print));
 	if (!philo->table->is_death)
-		printf("%lld %d %s\n", interval, id, action);
-	if (*action == 'd')
+		printf("%ld %d %s\n", interval, id, message);
+	if (*message == 'd')
     {
-	    pthread_mutex_lock(&(philo->table->mutex_meals));
+	    //pthread_mutex_lock(&(philo->table->mutex_meals));
 		philo->table->is_death = 1;
-	    pthread_mutex_unlock(&(philo->table->mutex_meals));
+	    //pthread_mutex_unlock(&(philo->table->mutex_meals));
     }
 	pthread_mutex_unlock(&(philo->table->mutex_print));
 }
@@ -37,6 +50,7 @@ void ft_eat(t_philo *philo)
     philog(philo, FORK);
     if (philo->table->nph == 1)
     {
+        //usleep(philo->table->td * 1000);
         philog(philo, DEAD);
         return ;
     }
@@ -44,9 +58,9 @@ void ft_eat(t_philo *philo)
     philog(philo, FORK);
 	philog(philo, EAT);
     philo->last_meal_time = time_now();
-    usleep(philo->table->te * 1000); 
-    pthread_mutex_unlock(philo->right_fork);
-	pthread_mutex_unlock(philo->left_fork);
+    usleep(table->te * 1000); 
+    pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
 }
 void    ft_sleep(t_philo *philo)
 {
@@ -56,13 +70,17 @@ void    ft_sleep(t_philo *philo)
 void    ft_think(t_philo *philo)
 {
     philog(philo, THINK);
-  //  usleep(1000);
+    // if (philo->table->te * 3 >= philo->table->td)
+    //     usleep(philo->table->te * 1000);
+    // else
+    //     //usleep (1000);
+    // if (philo->table->nph % 2)
+    //     usleep((philo->table->te - philo->table->ts + 200) * 1000);
 }
 void *routine(void *arg)
 {
     t_philo *philo = (t_philo *)arg;
     t_table     *table;
-
     table = philo->table;
     if (philo->id % 2 == 0)
         usleep(1000);
@@ -136,3 +154,4 @@ void        start_similation(t_philo *philos)
     monitor(philos);
     return ;
 }
+// ./philo 199 300 100 80

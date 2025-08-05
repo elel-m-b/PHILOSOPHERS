@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
+/*   Updated: 2025/08/05 17:12:37 by elel-m-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <unistd.h>
 #include <pthread.h>
@@ -20,7 +31,7 @@ typedef     struct      s_table
     long      ts;
     int     is_death;
     pthread_mutex_t	*forks;
-    long long start_time;
+    _Atomic long long start_time;
     pthread_mutex_t	mutex_meals;
     pthread_mutex_t	mutex_print;
 }t_table;
@@ -32,8 +43,8 @@ typedef     struct      s_philo
     pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
     t_table     *table;
-    long    last_meal_time;
-    int     eating;
+    _Atomic long    last_meal_time;
+    _Atomic int     eating;
 }t_philo;
 
 void	philog(t_philo *philo, const char *action);
