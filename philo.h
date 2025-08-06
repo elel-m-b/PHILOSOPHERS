@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/05 17:12:37 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/05 22:50:42 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef     struct      s_table
     long      td;
     long     te;
     long      ts;
-    int     is_death;
+    _Atomic int     is_death;
     pthread_mutex_t	*forks;
     _Atomic long long start_time;
     pthread_mutex_t	mutex_meals;
