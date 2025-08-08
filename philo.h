@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/05 22:50:42 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:53:32 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 #include <sys/time.h>
 #include <limits.h>
 
-#define FORK	"has taken a fork"
-#define SLEEP	"is sleeping"
-#define THINK	"is thinking"
-#define EAT		"is eating"
+#define TAKE_FORK	"has taken a fork"
+#define SLEEPPING	"is sleeping"
+#define THINKING	"is thinking"
+#define EATING		"is eating"
 #define DEAD	"died"
 
 typedef     struct      s_table

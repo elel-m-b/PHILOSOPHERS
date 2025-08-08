@@ -6,7 +6,7 @@
 #    By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 13:08:10 by elel-m-b          #+#    #+#              #
-#    Updated: 2025/08/04 13:08:13 by elel-m-b         ###   ########.fr        #
+#    Updated: 2025/08/07 13:54:33 by elel-m-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,11 @@ NAME = philo
 
 CC = cc -g
 
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-SRCS = main.c parse.c routine.c utils.c
+SRCS = main.c parse.c routine.c utils.c 
 
 OBJS = $(SRCS:.c=.o)
 
