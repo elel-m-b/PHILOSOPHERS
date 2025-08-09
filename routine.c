@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/07 17:52:27 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:09:17 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void ft_eat(t_philo *philo)
 	pthread_mutex_lock(philo->right_fork);
     philog(philo, TAKE_FORK);
 	philog(philo, EATING);
+    philo->eating++;
     philo->last_meal_time = time_now();
     usleep(table->te * 1000); 
     pthread_mutex_unlock(philo->left_fork);
@@ -69,6 +70,7 @@ void    ft_sleep(t_philo *philo)
 void    ft_think(t_philo *philo)
 {
     philog(philo, THINKING);
+    //usleep(10000);
     // if (philo->id % 2 != 0)
     //     usleep(500);
     // if (philo->table->te * 3 >= philo->table->td)
@@ -76,7 +78,7 @@ void    ft_think(t_philo *philo)
     // else
     //     //usleep (1000);
     // if (philo->table->nph % 2)
-    //     usleep((philo->table->te - philo->table->ts + 200) * 1000);
+    //     usleep((philo->table->te - philo->table->ts) * 1000);
 }
 void *routine(void *arg)
 {
@@ -121,16 +123,34 @@ void init_philosophers(t_philo *philos, t_table *table)
         philos->table->is_death = 0;
 		philos[i].left_fork= &(table->forks[i]);
         philos[i].right_fork = &(table->forks[(i + 1) % n_philo]);
+        philos[i].eating = 0;
         philos[i].last_meal_time = time_now();
         i++;
     }
 }
+// }
+// int     check_optional(t_philo *philo)
+// {
+//     int     i;
+//     i = 0;
+//     while (i < philo->table->nph)
+//     {
+//         if (philo->table->number_of_meals > 0 && philo->table->number_of_meals <= philo->eating)
+//             return (1);
+//         i++;
+//     }
+//     return (0);
+// }
+
 int monitor(t_philo *philos)
 {
     int i;
+    int count;
+
     while (1)
     {
         i = 0;
+        count = 0;
         while (i < philos->table->nph)
         {
             if (time_now() - philos[i].last_meal_time >= philos[i].table->td)
@@ -139,10 +159,15 @@ int monitor(t_philo *philos)
                 philos->table->is_death = 1;
                 return 1;
             }
+            else if (philos->table->number_of_meals > 0 && philos[i].eating >= philos->table->number_of_meals)
+                count++;
             i++;
         }
+        if (philos->table->number_of_meals > 0 && count == philos->table->nph)
+            philos->table->is_death = 1;
     }
 }
+
 void    wait_philosphers(t_philo *philos)
 {
     int     i;
@@ -165,5 +190,6 @@ void        start_similation(t_philo *philos)
     monitor(philos);
     return ;
 }
+
 // ./philo 199 300 100 80
 //./philo 199 599 200 200

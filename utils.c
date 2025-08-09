@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:07:46 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/05 16:49:24 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/09 18:09:35 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_atoll(char	*number)
 	i = 0;
 	signe = 1;
 	res = 0;
-    while ((number[i] == ' ') || (number[i] >= 9 && number[i] <= 13))
+    while ((number) && ((number[i] == ' ') || (number[i] >= 9 && number[i] <= 13)))
     {
         i++;
         if (number[i] == '-')
@@ -66,6 +66,7 @@ int	ft_atoll(char	*number)
 		res = res * 10 + (number[i] - '0');
 		i++;
 	}
+    // printf ("the res * signe is |%d|\n", res * signe);
 	return (res * signe);
 }
 
