@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/10 14:30:02 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/10 14:34:39 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void ft_eat(t_philo *philo)
 	t_table	*table;
 	table = philo->table;
 	pthread_mutex_lock(philo->left_fork);
-	philog(philo, TAKE_FORK);
+	philog(philo, "has taken a fork");
 	pthread_mutex_lock(philo->right_fork);
-	philog(philo, TAKE_FORK);
-	philog(philo, EATING);
+	philog(philo, "has taken a fork");
+	philog(philo, "is eating");
 	philo->eating++;
 	philo->last_meal_time = time_now();
 	usleep(table->te * 1000); 
@@ -35,9 +35,9 @@ void *routine(void *arg)
 	if (table->nph == 1)
 	{
 		pthread_mutex_lock(philo->left_fork);
-		philog(philo, TAKE_FORK);
+		philog(philo, "has taken a fork");
 		usleep(philo->table->td * 1000);
-		philog(philo, DEAD);
+		philog(philo, "died");
 		pthread_mutex_unlock(philo->left_fork);
 		return NULL;
 	}

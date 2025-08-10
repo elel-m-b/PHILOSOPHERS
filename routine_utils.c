@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 14:28:12 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/10 14:30:08 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/10 14:33:56 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	philog(t_philo *philo, const char *message)
 
 void    ft_sleep(t_philo *philo)
 {
-	philog(philo, SLEEPPING);
+	philog(philo, "is sleeping");
 	usleep(philo->table->ts * 1000);
 }
 void    ft_think(t_philo *philo)
 {
-	philog(philo, THINKING);
+	philog(philo, "is thinking");
 }
 
 int monitor(t_philo *philos)
@@ -61,7 +61,7 @@ int monitor(t_philo *philos)
 		{
 			if (time_now() - philos[i].last_meal_time >= philos[i].table->td)
 			{
-				philog(&philos[i], DEAD);
+				philog(&philos[i], "died");
 				philos->table->is_death = 1;
 				return 1;
 			}
