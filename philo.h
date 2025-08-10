@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/09 15:36:42 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/10 14:30:16 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,27 @@
 
 typedef     struct      s_table
 {
-    long     nph;
-    long      td;
-    long     te;
-    long      ts;
-    long        number_of_meals;
-    _Atomic int     is_death;
-    pthread_mutex_t	*forks;
-    _Atomic long long start_time;
-    pthread_mutex_t	mutex_meals;
-    pthread_mutex_t	mutex_print;
+	long     nph;
+	long      td;
+	long     te;
+	long      ts;
+	long        number_of_meals;
+	_Atomic int     is_death;
+	pthread_mutex_t	*forks;
+	_Atomic long long start_time;
+	pthread_mutex_t	mutex_meals;
+	pthread_mutex_t	mutex_print;
 }t_table;
 
 typedef     struct      s_philo
 {
-    int     id;
-    pthread_t       *threads;
-    pthread_mutex_t		*left_fork;
+	int     id;
+	unsigned long int       *threads;
+	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
-    t_table     *table;
-    _Atomic long    last_meal_time;
-    _Atomic int     eating;
+	t_table     *table;
+	_Atomic long    last_meal_time;
+	_Atomic int     eating;
 }t_philo;
 
 void	philog(t_philo *philo, const char *action);
@@ -59,3 +59,8 @@ void        put_errro(char *err);
 int     check_args(int ac);
 long	time_now(void);
 int	ft_atoll(char	*number);
+long	time_now(void);
+void	philog(t_philo *philo, const char *message);
+void    ft_sleep(t_philo *philo);
+void    ft_think(t_philo *philo);
+int monitor(t_philo *philos);
