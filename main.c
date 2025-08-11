@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:08:04 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/10 14:29:22 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:15:37 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	destroy_all_mutexes(t_table *table)
 		i++;
 	}
 	pthread_mutex_destroy(&table->mutex_print);
+	free(table->forks);
 }
 
 int main(int        ac, char **av)
