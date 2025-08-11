@@ -6,25 +6,28 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:08:04 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/11 14:15:37 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:29:27 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 
-void	destroy_all_mutexes(t_table *table)
+void	destroy_all_mutexes(t_philo *philo)
 {
 	int		i;
 
 	i = 0;
-	while (i < table->nph)
+	while (i < philo->table->nph)
 	{
-		pthread_mutex_destroy(&table->forks[i]);
+		pthread_mutex_destroy(&philo->table->forks[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&table->mutex_print);
-	free(table->forks);
+	pthread_mutex_destroy(&philo->table->mutex_print);
+	free(philo->table->forks);
+	free(philo->threads);
+	free(philo);
+	
 }
 
 int main(int        ac, char **av)
@@ -41,6 +44,6 @@ int main(int        ac, char **av)
 	init_philosophers(philos, &table);
 	start_similation(philos);
 	wait_philosphers(philos);
-	destroy_all_mutexes(philos->table);
+	destroy_all_mutexes(philos);
 	return (0);
 }

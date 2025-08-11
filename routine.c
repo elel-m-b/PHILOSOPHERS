@@ -6,64 +6,39 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/11 16:54:46 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/11 18:05:39 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-void		ft_eat(t_philo *philo)
+
+int  ft_eat(t_philo *philo)
 {
-	t_table		*table;
+	t_table	*table;
 	table = philo->table;
-
-
-	if (philo->id % 2 == 0)
+	pthread_mutex_lock(philo->left_fork);
+	philog(philo, "has taken a fork");
+	if (philo->table->is_death)
 	{
-		pthread_mutex_lock(philo->left_fork);
-		philog(philo, "has taken a fork");
-		pthread_mutex_lock(philo->right_fork);
-		philog(philo, "has taken a fork");
-		philog(philo, "is eating");
-		philo->last_meal_time = time_now();
-		usleep(table->te * 1000);
+		pthread_mutex_unlock(philo->left_fork);
+		return 1;	
 	}
-	else
-	{
-		pthread_mutex_lock(philo->right_fork);
-		philog(philo, "has taken a fork");
-		pthread_mutex_lock(philo->left_fork);
-		philog(philo, "has taken a fork");
-		philog(philo, "is eating");
-		philo->last_meal_time = time_now();
-		usleep(table->te * 1000);
-	}
-	if (philo->id % 2 == 0)
+	pthread_mutex_lock(philo->right_fork);
+	philog(philo, "has taken a fork");
+	if (philo->table->is_death)
 	{
 		pthread_mutex_unlock(philo->left_fork);
 		pthread_mutex_unlock(philo->right_fork);
+		return 1;	
 	}
-	else
-	{
-		pthread_mutex_unlock(philo->right_fork);
-		pthread_mutex_unlock(philo->left_fork);
-	}
+	philog(philo, "is eating");
+	philo->eating++;
+	philo->last_meal_time = time_now();
+	usleep(table->te * 1000); 
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
+	return (0);
 }
-
-// void ft_eat(t_philo *philo)
-// {
-// 	t_table	*table;
-// 	table = philo->table;
-// 	pthread_mutex_lock(philo->left_fork);
-// 	philog(philo, "has taken a fork");
-// 	pthread_mutex_lock(philo->right_fork);
-// 	philog(philo, "has taken a fork");
-// 	philog(philo, "is eating");
-// 	philo->eating++;
-// 	philo->last_meal_time = time_now();
-// 	usleep(table->te * 1000); 
-// 	pthread_mutex_unlock(philo->left_fork);
-// 	pthread_mutex_unlock(philo->right_fork);
-// }
 void *routine(void *arg)
 {
 	t_philo *philo = (t_philo *)arg;
@@ -83,7 +58,8 @@ void *routine(void *arg)
 	while (!table->is_death)
 	{
 		ft_think(philo);
-		ft_eat(philo);
+		if (ft_eat(philo))
+			return (NULL);
 		ft_sleep(philo);
 	}
 	return (NULL);
@@ -120,7 +96,7 @@ void    wait_philosphers(t_philo *philos)
 		pthread_join(philos->threads[i], NULL);
 		i++;
 	}
-	free(philos);
+
 }
 void        start_similation(t_philo *philos)
 {

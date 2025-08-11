@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 14:28:12 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/10 14:33:56 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:40:30 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void    ft_sleep(t_philo *philo)
 void    ft_think(t_philo *philo)
 {
 	philog(philo, "is thinking");
+	usleep(1000);
 }
 
 int monitor(t_philo *philos)
