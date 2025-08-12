@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 14:28:12 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/11 17:40:30 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/12 20:57:08 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ long	time_now(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-void	philog(t_philo *philo, const char *message)
+void	philo_message(t_philo *philo, const char *message)
 {
 	long	interval;
 	long	start;
@@ -33,19 +33,17 @@ void	philog(t_philo *philo, const char *message)
 	pthread_mutex_lock(&(philo->table->mutex_print));
 	if (!philo->table->is_death)
 		printf("%ld %d %s\n", interval, id, message);
-	if (*message == 'd')
-		philo->table->is_death = 1;
 	pthread_mutex_unlock(&(philo->table->mutex_print));
 }
 
 void    ft_sleep(t_philo *philo)
 {
-	philog(philo, "is sleeping");
+	philo_message(philo, "is sleeping");
 	usleep(philo->table->ts * 1000);
 }
 void    ft_think(t_philo *philo)
 {
-	philog(philo, "is thinking");
+	philo_message(philo, "is thinking");
 	usleep(1000);
 }
 
@@ -62,7 +60,7 @@ int monitor(t_philo *philos)
 		{
 			if (time_now() - philos[i].last_meal_time >= philos[i].table->td)
 			{
-				philog(&philos[i], "died");
+				philo_message(&philos[i], "died");
 				philos->table->is_death = 1;
 				return 1;
 			}

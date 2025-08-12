@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/10 14:34:10 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/12 20:56:38 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <limits.h>
-
+#include <stdatomic.h>
 typedef     struct      s_table
 {
 	long     nph;
@@ -42,7 +42,7 @@ typedef     struct      s_philo
 	_Atomic int     eating;
 }t_philo;
 
-void	philog(t_philo *philo, const char *action);
+void	philo_message(t_philo *philo, const char *action);
 void        start_similation(t_philo *philos);
 void *routine(void *arg);
 int     parsing_args(char **av, t_table *table);

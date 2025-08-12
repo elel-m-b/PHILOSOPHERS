@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/11 18:05:39 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/12 20:56:31 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@ int  ft_eat(t_philo *philo)
 	t_table	*table;
 	table = philo->table;
 	pthread_mutex_lock(philo->left_fork);
-	philog(philo, "has taken a fork");
+	philo_message(philo, "has taken a fork");
 	if (philo->table->is_death)
 	{
 		pthread_mutex_unlock(philo->left_fork);
 		return 1;	
 	}
 	pthread_mutex_lock(philo->right_fork);
-	philog(philo, "has taken a fork");
+	philo_message(philo, "has taken a fork");
 	if (philo->table->is_death)
 	{
 		pthread_mutex_unlock(philo->left_fork);
 		pthread_mutex_unlock(philo->right_fork);
 		return 1;	
 	}
-	philog(philo, "is eating");
+	philo_message(philo, "is eating");
 	philo->eating++;
 	philo->last_meal_time = time_now();
 	usleep(table->te * 1000); 
@@ -47,9 +47,9 @@ void *routine(void *arg)
 	if (table->nph == 1)
 	{
 		pthread_mutex_lock(philo->left_fork);
-		philog(philo, "has taken a fork");
+		philo_message(philo, "has taken a fork");
 		usleep(philo->table->td * 1000);
-		philog(philo, "died");
+		philo_message(philo, "died");
 		pthread_mutex_unlock(philo->left_fork);
 		return NULL;
 	}
@@ -78,8 +78,8 @@ void init_philosophers(t_philo *philos, t_table *table)
 		pthread_mutex_init(&(table->forks[i]), NULL);
 		philos[i].table = table;
 		philos[i].id = i + 1;
-		philos->table->is_death = 0;
 		philos[i].left_fork= &(table->forks[i]);
+		philos->table->is_death = 0;
 		philos[i].right_fork = &(table->forks[(i + 1) % n_philo]);
 		philos[i].eating = 0;
 		philos[i].last_meal_time = time_now();
