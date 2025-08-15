@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/15 14:12:01 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/15 15:25:34 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int		check_died(t_philo *philo)
 	return (flag);
 }
 
+void ft_unlock(t_philo *philo)
+{
+	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
+}
 int  ft_eat(t_philo *philo)
 {
 	t_table	*table;
@@ -35,11 +40,7 @@ int  ft_eat(t_philo *philo)
 	pthread_mutex_lock(philo->right_fork);
 	philo_message(philo, "has taken a fork");
 	if (check_died(philo))
-	{
-		pthread_mutex_unlock(philo->right_fork);
-		pthread_mutex_unlock(philo->left_fork);
-		return 1;	
-	}
+		return (ft_unlock(philo), 1);	
 	philo_message(philo, "is eating");
 	pthread_mutex_lock(&(philo->eating_mutex));
 	philo->eating++;
@@ -52,20 +53,21 @@ int  ft_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->left_fork);
 	return (0);
 }
+void		one_philosopher(t_philo *philo)
+{
+	pthread_mutex_lock(philo->left_fork);
+	philo_message(philo, "has taken a fork");
+	usleep(philo->table->td * 1000);
+	philo_message(philo, "died");
+	pthread_mutex_unlock(philo->left_fork);
+}
 void *routine(void *arg)
 {
 	t_philo *philo = (t_philo *)arg;
 	t_table     *table;
 	table = philo->table;
 	if (table->nph == 1)
-	{
-		pthread_mutex_lock(philo->left_fork);
-		philo_message(philo, "has taken a fork");
-		usleep(philo->table->td * 1000);
-		philo_message(philo, "died");
-		pthread_mutex_unlock(philo->left_fork);
-		return NULL;
-	}
+		return (one_philosopher(philo), NULL);
 	if (philo->id % 2 == 0)
 		usleep(1000);
 	while (!check_died(philo))
