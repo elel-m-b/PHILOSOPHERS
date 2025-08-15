@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/13 17:48:30 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/15 14:12:01 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void *routine(void *arg)
 	}
 	return (NULL);
 }
+
 void init_philosophers(t_philo *philos, t_table *table)
 {
 	int     i;
@@ -86,12 +87,12 @@ void init_philosophers(t_philo *philos, t_table *table)
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->nph);
 	table->start_time = time_now();
 	pthread_mutex_init(&(table->mutex_print), NULL);
-	pthread_mutex_init(&(philos->mutex_meals), NULL);
 	pthread_mutex_init(&(table->mutex_death), NULL);
-	pthread_mutex_init(&(philos->eating_mutex), NULL);
 	while (i < table->nph)
 	{
 		pthread_mutex_init(&(table->forks[i]), NULL);
+		pthread_mutex_init(&(philos[i].mutex_meals), NULL);
+		pthread_mutex_init(&(philos[i].eating_mutex), NULL);
 		philos[i].table = table;
 		philos[i].id = i + 1;
 		philos[i].left_fork= &(table->forks[i]);

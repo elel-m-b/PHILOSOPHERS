@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/13 16:29:58 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/15 14:12:27 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef     struct      s_table
 typedef     struct      s_philo
 {
 	int     id;
-	unsigned long int       *threads;
+	pthread_t       *threads;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
 	t_table     *table;

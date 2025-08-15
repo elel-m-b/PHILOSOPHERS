@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:08:04 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/13 16:32:48 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/15 14:14:50 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	destroy_all_mutexes(t_philo *philo)
 	while (i < philo->table->nph)
 	{
 		pthread_mutex_destroy(&philo->table->forks[i]);
+		pthread_mutex_destroy(&philo[i].mutex_meals);
+		pthread_mutex_destroy(&philo[i].eating_mutex);
 		i++;
 	}
 	pthread_mutex_destroy(&philo->table->mutex_print);
 	pthread_mutex_destroy(&philo->table->mutex_death);
-	pthread_mutex_destroy(&philo->mutex_meals);
-	pthread_mutex_destroy(&philo->eating_mutex);
 	free(philo->table->forks);
 	free(philo->threads);
 	free(philo);
