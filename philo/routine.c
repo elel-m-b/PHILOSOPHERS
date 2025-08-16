@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 17:39:06 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 20:32:07 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,9 @@ int	ft_eat(t_philo *philo)
 	t_table	*table;
 
 	table = philo->table;
-	pthread_mutex_lock(philo->left_fork);
-	philo_message(philo, "has taken a fork");
-	if (check_died(philo))
-		return (pthread_mutex_unlock(philo->left_fork), 1);
-	pthread_mutex_lock(philo->right_fork);
-	philo_message(philo, "has taken a fork");
-	if (check_died(philo))
-		return (ft_unlock(philo), 1);
+
+	if (ft_take_forks(philo))
+		return (1);
 	philo_message(philo, "is eating");
 	pthread_mutex_lock(&(philo->eating_mutex));
 	philo->eating++;
@@ -35,15 +30,6 @@ int	ft_eat(t_philo *philo)
 	usleep(table->te * 1000);
 	ft_unlock(philo);
 	return (0);
-}
-
-void	one_philosopher(t_philo *philo)
-{
-	pthread_mutex_lock(philo->left_fork);
-	philo_message(philo, "has taken a fork");
-	usleep(philo->table->td * 1000);
-	philo_message(philo, "died");
-	pthread_mutex_unlock(philo->left_fork);
 }
 
 void	*routine(void *arg)
@@ -118,4 +104,3 @@ void	start_similation(t_philo *philos)
 	}
 	monitor(philos);
 }
-

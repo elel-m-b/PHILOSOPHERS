@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 17:37:49 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 20:32:41 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	init_philosophers(t_philo *philos, t_table *table);
 int		ft_numberlen(char *s);
 int		check_args(int ac);
 long	time_now(void);
-long		ft_atoll(char *number);
+long	ft_atoll(char *number);
 void	philo_message(t_philo *philo, const char *message);
 void	ft_sleep(t_philo *philo);
 void	ft_think(t_philo *philo);
@@ -65,5 +65,10 @@ int		monitor(t_philo *philos);
 int		check_died(t_philo *philo);
 void	ft_unlock(t_philo *philo);
 void	asiigne_died(t_philo *philo);
-void        put_error(char *err);
+void	put_error(char *err);
+void	one_philosopher(t_philo *philo);
+int		check_death(t_philo *philos, int i);
+int		check_meals(t_philo *philos, int *count, int i);
+int		ft_take_forks(t_philo *philo);
+int		the_last(t_philo 	*philo);
 #endif

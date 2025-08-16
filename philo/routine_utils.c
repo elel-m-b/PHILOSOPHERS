@@ -6,11 +6,20 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 14:28:12 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 17:08:27 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 19:57:14 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	one_philosopher(t_philo *philo)
+{
+	pthread_mutex_lock(philo->left_fork);
+	philo_message(philo, "has taken a fork");
+	usleep(philo->table->td * 1000);
+	philo_message(philo, "died");
+	pthread_mutex_unlock(philo->left_fork);
+}
 
 void	philo_message(t_philo *philo, const char *message)
 {
@@ -37,13 +46,15 @@ void	ft_sleep(t_philo *philo)
 void	ft_think(t_philo *philo)
 {
 	philo_message(philo, "is thinking");
+	if (philo->table->te > philo->table->ts)
+		usleep(philo->table->te * 1000);
 	usleep(1000);
 }
 
 int	monitor(t_philo *philos)
 {
-	int		i;
-	int		count;
+	int	i;
+	int	count;
 
 	while (1)
 	{
@@ -51,23 +62,11 @@ int	monitor(t_philo *philos)
 		count = 0;
 		while (++i < philos->table->nph)
 		{
-			pthread_mutex_lock(&(philos[i].mutex_meals));
-			if (time_now() - philos[i].last_meal_time >= philos[i].table->td)
-			{
-				philo_message(&philos[i], "died");
-				asiigne_died(philos);
-				return (pthread_mutex_unlock(&(philos[i].mutex_meals)), 1);
-			}
-			pthread_mutex_unlock(&(philos[i].mutex_meals));
-			pthread_mutex_lock(&(philos[i].eating_mutex));
-			if (philos->table->number_of_meals > 0
-				&& philos[i].eating >= philos->table->number_of_meals)
-				count++;
-			pthread_mutex_unlock(&(philos[i].eating_mutex));
+			if (check_death(philos, i))
+				return (1);
+			check_meals(philos, &count, i);
 		}
-		if (philos->table->number_of_meals > 0
-			&& count == philos->table->nph)
+		if (philos->table->number_of_meals > 0 && count == philos->table->nph)
 			return (asiigne_died(philos), 1);
 	}
 }
-

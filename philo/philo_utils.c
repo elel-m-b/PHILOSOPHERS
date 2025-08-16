@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 17:08:45 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 17:09:18 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 18:13:36 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_unlock(t_philo *philo)
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
 }
+
 long	time_now(void)
 {
 	struct timeval	tv;

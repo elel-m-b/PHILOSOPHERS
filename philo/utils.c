@@ -6,27 +6,28 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:07:46 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 17:25:39 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 18:12:39 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int     ft_numberlen(char *s)
+int	ft_numberlen(char *s)
 {
-	int     i;
+	int	i;
+
 	i = 0;
 	while (s[i])
 		i++;
 	return (i);
 }
 
-void        put_error(char *err)
+void	put_error(char *err)
 {
-	write (2, err, ft_numberlen(err));
+	write(2, err, ft_numberlen(err));
 }
 
-int     check_args(int ac)
+int	check_args(int ac)
 {
 	if (ac != 6 && ac != 5)
 	{
@@ -35,7 +36,6 @@ int     check_args(int ac)
 	}
 	return (0);
 }
-
 
 long	ft_atoll(char *str)
 {
