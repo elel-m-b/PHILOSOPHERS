@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 18:28:14 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 20:32:13 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 20:42:06 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	check_meals(t_philo *philos, int *count, int i)
 	pthread_mutex_unlock(&(philos[i].eating_mutex));
 	return (0);
 }
+
 int		the_last(t_philo 	*philo)
 {
 	pthread_mutex_lock(philo->right_fork);
@@ -47,7 +48,7 @@ int		the_last(t_philo 	*philo)
 		return (ft_unlock(philo), 1);
 	return (0);
 }
-int	ft_take_forks(t_philo *philo)
+int		ft_take_forks(t_philo *philo)
 {
 	t_table	*table;
 

@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 20:32:07 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 20:41:41 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_eat(t_philo *philo)
 	t_table	*table;
 
 	table = philo->table;
-
 	if (ft_take_forks(philo))
 		return (1);
 	philo_message(philo, "is eating");

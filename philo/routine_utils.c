@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 14:28:12 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 19:57:14 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 20:41:04 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,23 @@ void	one_philosopher(t_philo *philo)
 	pthread_mutex_unlock(philo->left_fork);
 }
 
+
+void	ft_sleep(t_philo *philo)
+{
+	philo_message(philo, "is sleeping");
+	usleep(philo->table->ts * 1000);
+}
+
+void	ft_think(t_philo *philo)
+{
+	philo_message(philo, "is thinking");
+	if (philo->id % 2 == 0)
+	{
+		if (philo->table->te > philo->table->ts)
+		usleep(philo->table->te * 1000);
+	}
+	usleep(1000);
+}
 void	philo_message(t_philo *philo, const char *message)
 {
 	long	interval;
@@ -35,20 +52,6 @@ void	philo_message(t_philo *philo, const char *message)
 	if (!check_died(philo))
 		printf("%ld %d %s\n", interval, id, message);
 	pthread_mutex_unlock(&(philo->table->mutex_print));
-}
-
-void	ft_sleep(t_philo *philo)
-{
-	philo_message(philo, "is sleeping");
-	usleep(philo->table->ts * 1000);
-}
-
-void	ft_think(t_philo *philo)
-{
-	philo_message(philo, "is thinking");
-	if (philo->table->te > philo->table->ts)
-		usleep(philo->table->te * 1000);
-	usleep(1000);
 }
 
 int	monitor(t_philo *philos)
