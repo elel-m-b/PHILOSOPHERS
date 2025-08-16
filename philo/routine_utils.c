@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 14:28:12 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 20:41:04 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 22:44:34 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ void	ft_sleep(t_philo *philo)
 void	ft_think(t_philo *philo)
 {
 	philo_message(philo, "is thinking");
-	if (philo->id % 2 == 0)
-	{
-		if (philo->table->te > philo->table->ts)
-		usleep(philo->table->te * 1000);
-	}
+	if (philo->table->nph % 2 && philo->table->te > philo->table->ts)
+		usleep(philo->table->te*1000);
 	usleep(1000);
 }
 void	philo_message(t_philo *philo, const char *message)
