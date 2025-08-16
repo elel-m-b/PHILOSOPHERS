@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 17:08:09 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:39:06 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	table = philo->table;
 	if (table->nph == 1)
-	{
-		one_philosopher(philo);
-		return (NULL);
-	}
+		return (one_philosopher(philo), NULL);
 	if (philo->id % 2 == 0)
 		usleep(1000);
 	while (!check_died(philo))
@@ -77,7 +74,6 @@ void	init_philosophers(t_philo *philos, t_table *table)
 
 	i = 0;
 	n_philo = table->nph;
-	philos->threads = malloc(sizeof(pthread_t) * table->nph);
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->nph);
 	table->start_time = time_now();
 	pthread_mutex_init(&(table->mutex_print), NULL);
@@ -105,7 +101,7 @@ void	wait_philosphers(t_philo *philos)
 	i = 0;
 	while (i < philos->table->nph)
 	{
-		pthread_join(philos->threads[i], NULL);
+		pthread_join(philos[i].threads, NULL);
 		i++;
 	}
 }
@@ -117,7 +113,7 @@ void	start_similation(t_philo *philos)
 	i = 0;
 	while (i < philos->table->nph)
 	{
-		pthread_create(&philos->threads[i], NULL, routine, &philos[i]);
+		pthread_create(&philos[i].threads, NULL, routine, &philos[i]);
 		i++;
 	}
 	monitor(philos);
