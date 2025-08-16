@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 22:49:45 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 22:51:37 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_philo
 void	philo_message(t_philo *philo, const char *action);
 void	start_similation(t_philo *philos);
 void	*routine(void *arg);
-int		parsing_args(char **av, t_table *table);
 void	wait_philosphers(t_philo *philos);
 void	init_philosophers(t_philo *philos, t_table *table);
 int		ft_numberlen(char *s);
