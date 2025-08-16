@@ -6,9 +6,11 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 18:28:14 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 20:42:06 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 22:47:01 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philo.h"
 
 #include "philo.h"
 
@@ -36,7 +38,7 @@ int	check_meals(t_philo *philos, int *count, int i)
 	return (0);
 }
 
-int		the_last(t_philo 	*philo)
+int	the_last(t_philo *philo)
 {
 	pthread_mutex_lock(philo->right_fork);
 	philo_message(philo, "has taken a fork");
@@ -48,24 +50,21 @@ int		the_last(t_philo 	*philo)
 		return (ft_unlock(philo), 1);
 	return (0);
 }
-int		ft_take_forks(t_philo *philo)
+
+int	ft_take_forks(t_philo *philo)
 {
 	t_table	*table;
 
 	table = philo->table;
-
 	if (philo->id == table->nph)
 		return (the_last(philo));
-	else
-	{
-		pthread_mutex_lock(philo->left_fork);
-		philo_message(philo, "has taken a fork");
-		if (check_died(philo))
-			return (pthread_mutex_unlock(philo->left_fork), 1);
-		pthread_mutex_lock(philo->right_fork);
-		philo_message(philo, "has taken a fork");
-		if (check_died(philo))
-			return (ft_unlock(philo), 1);
-	}
+	pthread_mutex_lock(philo->left_fork);
+	philo_message(philo, "has taken a fork");
+	if (check_died(philo))
+		return (pthread_mutex_unlock(philo->left_fork), 1);
+	pthread_mutex_lock(philo->right_fork);
+	philo_message(philo, "has taken a fork");
+	if (check_died(philo))
+		return (ft_unlock(philo), 1);
 	return (0);
 }

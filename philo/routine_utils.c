@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 14:28:12 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 22:44:34 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 22:48:37 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	one_philosopher(t_philo *philo)
 	pthread_mutex_unlock(philo->left_fork);
 }
 
-
 void	ft_sleep(t_philo *philo)
 {
 	philo_message(philo, "is sleeping");
@@ -32,9 +31,10 @@ void	ft_think(t_philo *philo)
 {
 	philo_message(philo, "is thinking");
 	if (philo->table->nph % 2 && philo->table->te > philo->table->ts)
-		usleep(philo->table->te*1000);
+		usleep(philo->table->te * 1000);
 	usleep(1000);
 }
+
 void	philo_message(t_philo *philo, const char *message)
 {
 	long	interval;
@@ -66,7 +66,8 @@ int	monitor(t_philo *philos)
 				return (1);
 			check_meals(philos, &count, i);
 		}
-		if (philos->table->number_of_meals > 0 && count == philos->table->nph)
+		if (philos->table->number_of_meals > 0
+			&& count == philos->table->nph)
 			return (asiigne_died(philos), 1);
 	}
 }
