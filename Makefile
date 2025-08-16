@@ -6,7 +6,7 @@
 #    By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 13:08:10 by elel-m-b          #+#    #+#              #
-#    Updated: 2025/08/10 14:25:28 by elel-m-b         ###   ########.fr        #
+#    Updated: 2025/08/16 17:09:50 by elel-m-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-SRCS = main.c parse.c routine.c utils.c routine_utils.c
+SRCS = main.c parse.c routine.c utils.c routine_utils.c philo_utils.c
 
 OBJS = $(SRCS:.c=.o)
 

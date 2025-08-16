@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:08:04 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/15 14:14:50 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:11:42 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main(int        ac, char **av)
 		return (1);
 	philos = malloc(sizeof(t_philo) * table.nph);
 	if (!philos)
-		put_errro("malloc failed\n");
+		put_error("malloc failed\n");
 	init_philosophers(philos, &table);
 	start_similation(philos);
 	wait_philosphers(philos);

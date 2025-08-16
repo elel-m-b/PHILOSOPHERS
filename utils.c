@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:07:46 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/10 14:30:23 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:25:39 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int     ft_numberlen(char *s)
 	return (i);
 }
 
-void        put_errro(char *err)
+void        put_error(char *err)
 {
 	write (2, err, ft_numberlen(err));
 }
@@ -30,44 +30,36 @@ int     check_args(int ac)
 {
 	if (ac != 6 && ac != 5)
 	{
-		put_errro("Error\n");
+		put_error("Error\n");
 		return (1);
 	}
 	return (0);
 }
 
-int	ft_atoll(char	*number)
+
+long	ft_atoll(char *str)
 {
-	int	i;
-	int	signe;
-	int	res;
+	long	num;
+	int		sign;
 
-	i = 0;
-	signe = 1;
-	res = 0;
-	while ((number) && ((number[i] == ' ') || (number[i] >= 9 && number[i] <= 13)))
+	while (*str == ' ' || *str == '\t')
+		str++;
+	sign = 1;
+	if (*str == '-' || *str == '+')
+		if (*str++ == '-')
+			sign = -1;
+	if (!*str)
+		return (LONG_MIN);
+	num = 0;
+	while (*str >= '0' && *str <= '9')
 	{
-		i++;
-		if (number[i] == '-')
-		{
-			signe = -1;
-			i++;
-		}
+		num = num * 10 + *str++ - '0';
+		if (num * sign > INT_MAX || num * sign < INT_MIN)
+			return (LONG_MIN);
 	}
-	if (number[i] == '+')
-		i++;
-	while (number[i])
-	{
-		if (number[i] < '0' || number[i] > '9')
-		{
-			put_errro("Error\n");
-			return (0);
-		}
-		res = res * 10 + (number[i] - '0');
-		i++;
-	}
-	// printf ("the res * signe is |%d|\n", res * signe);
-	return (res * signe);
+	while (*str == ' ' || *str == '\t')
+		str++;
+	if (sign * num < 0 || *str)
+		return (LONG_MIN);
+	return (sign * num);
 }
-
-//./philo 199 600 200 300
