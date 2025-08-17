@@ -6,11 +6,25 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:07:46 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 11:20:34 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 21:19:58 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	ft_usleep(long interval, t_philo *philo)
+{
+	long	now;
+
+	now = time_now();
+	while (time_now() - now < interval)
+	{
+		if (check_died(philo))
+			return (1);
+		usleep(300);
+	}
+	return (0);
+}
 
 int	ft_numberlen(char *s)
 {
