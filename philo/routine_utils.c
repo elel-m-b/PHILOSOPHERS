@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 14:28:12 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 22:48:37 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 10:53:05 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,14 @@ void	ft_think(t_philo *philo)
 
 void	philo_message(t_philo *philo, const char *message)
 {
-	long	interval;
 	long	start;
 	int		id;
 
-	interval = 0;
 	id = philo->id;
 	start = philo->table->start_time;
-	interval = time_now() - start;
 	pthread_mutex_lock(&(philo->table->mutex_print));
 	if (!check_died(philo))
-		printf("%ld %d %s\n", interval, id, message);
+		printf("%ld %d %s\n", time_now() - start, id, message);
 	pthread_mutex_unlock(&(philo->table->mutex_print));
 }
 
@@ -69,5 +66,6 @@ int	monitor(t_philo *philos)
 		if (philos->table->number_of_meals > 0
 			&& count == philos->table->nph)
 			return (asiigne_died(philos), 1);
+		usleep(500);
 	}
 }
