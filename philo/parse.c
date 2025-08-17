@@ -6,11 +6,24 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:07:57 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 11:22:03 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 13:35:36 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static int	handle_meals(char *argv[], t_table *table)
+{
+	if (argv[5])
+	{
+		table->number_of_meals = ft_atoll(argv[5]);
+		if (table->number_of_meals < 0)
+			return (put_error("Invalid argument"), -1);
+		if (!table->number_of_meals)
+			return (1);
+	}
+	return (0);
+}
 
 int	parsing_args(char *argv[], t_table *table)
 {
@@ -21,16 +34,7 @@ int	parsing_args(char *argv[], t_table *table)
 	table->number_of_meals = -1;
 	if (table->nph <= 0 || table->nph > 200)
 		return (put_error("Invalid argument"), 1);
-	if (argv[5])
-	{
-		table->number_of_meals = ft_atoll(argv[5]);
-		if (table->number_of_meals < 0)
-			return (put_error("Invalid argumnet"), -1);
-		if (!table->number_of_meals)
-			return (1);
-	}
-	if (table->td < 0 || table->te < 0
-		|| table->ts < 0 || table->nph < 0)
+	if (table->td < 0 || table->te < 0 || table->ts < 0)
 		return (put_error("Invalid argument"), 1);
-	return (0);
+	return (handle_meals(argv, table));
 }
