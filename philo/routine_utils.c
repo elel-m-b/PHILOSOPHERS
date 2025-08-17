@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 14:28:12 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 10:53:05 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 13:56:03 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ int	monitor(t_philo *philos)
 		if (philos->table->number_of_meals > 0
 			&& count == philos->table->nph)
 			return (asiigne_died(philos), 1);
-		usleep(500);
 	}
 }
