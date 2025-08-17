@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:08:04 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 10:46:25 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 10:55:26 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	main(int ac, char **av)
 	if (!philos)
 		return (put_error("malloc failed\n"), 1);
 	init_philosophers(philos, &table);
-	if (start_similation(philos))
+	if (start_simulation(philos))
 		return (1);
-	wait_philosphers(philos);
+	wait_philosophers(philos);
 	destroy_all_mutexes(philos);
 	return (0);
 }
