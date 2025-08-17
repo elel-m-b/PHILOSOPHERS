@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:07:57 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 11:17:13 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 11:22:03 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	parsing_args(char *argv[], t_table *table)
 	table->te = ft_atoll(argv[3]);
 	table->ts = ft_atoll(argv[4]);
 	table->number_of_meals = -1;
-	if (table->nph < 0 || table->nph > 200)
+	if (table->nph <= 0 || table->nph > 200)
 		return (put_error("Invalid argument"), 1);
 	if (argv[5])
 	{

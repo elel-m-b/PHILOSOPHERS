@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:07:46 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 11:17:55 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 11:20:34 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ long	ft_atoll(char *str)
 		if (*str++ == '-')
 			sign = -1;
 	if (!*str)
-		return (LONG_MIN);
+		return (-1);
 	num = 0;
 	while (*str >= '0' && *str <= '9')
 	{
 		num = num * 10 + *str++ - '0';
 		if (num * sign > INT_MAX || num * sign < INT_MIN)
-			return (LONG_MIN);
+			return (-1);
 	}
 	while (*str == ' ' || *str == '\t')
 		str++;
 	if (sign * num < 0 || *str)
-		return (LONG_MIN);
+		return (-1);
 	return (sign * num);
 }
