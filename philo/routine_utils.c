@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 14:28:12 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 13:56:03 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:20:51 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,14 @@ int	monitor(t_philo *philos)
 
 	while (1)
 	{
-		i = -1;
+		i = 0;
 		count = 0;
-		while (++i < philos->table->nph)
+		while (i < philos->table->nph)
 		{
 			if (check_death(philos, i))
 				return (1);
 			check_meals(philos, &count, i);
+			i++;
 		}
 		if (philos->table->number_of_meals > 0
 			&& count == philos->table->nph)
