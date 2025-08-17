@@ -6,11 +6,9 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 18:28:14 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 10:48:47 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 11:13:19 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "philo.h"
 
 #include "philo.h"
 
@@ -67,4 +65,14 @@ int	ft_take_forks(t_philo *philo)
 	if (check_died(philo))
 		return (ft_unlock(philo), 1);
 	return (0);
+}
+
+void	init_philo_data(t_philo *philo, t_table *table, int i, int n_philo)
+{
+	philo->table = table;
+	philo->id = i + 1;
+	philo->left_fork = &table->forks[i];
+	philo->right_fork = &table->forks[(i + 1) % n_philo];
+	philo->eating = 0;
+	philo->last_meal_time = time_now();
 }

@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 10:52:36 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 11:13:06 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,31 +52,23 @@ void	*routine(void *arg)
 	return (NULL);
 }
 
-void	init_philosophers(t_philo *philos, t_table *table)
+int	init_philosophers(t_philo *philos, t_table *table)
 {
 	int	i;
 	int	n_philo;
 
-	i = 0;
 	n_philo = table->nph;
 	table->forks = malloc(sizeof(pthread_mutex_t) * table->nph);
+	if (!table->forks)
+		return (put_error("malloc failed\n"), 1);
 	table->start_time = time_now();
 	pthread_mutex_init(&table->mutex_print, NULL);
 	pthread_mutex_init(&table->mutex_death, NULL);
-	while (i < table->nph)
-	{
-		pthread_mutex_init(&table->forks[i], NULL);
-		pthread_mutex_init(&philos[i].mutex_meals, NULL);
-		pthread_mutex_init(&philos[i].eating_mutex, NULL);
-		philos[i].table = table;
-		philos[i].id = i + 1;
-		philos[i].left_fork = &table->forks[i];
-		table->is_death = 0;
-		philos[i].right_fork = &table->forks[(i + 1) % n_philo];
-		philos[i].eating = 0;
-		philos[i].last_meal_time = time_now();
-		i++;
-	}
+	table->is_death = 0;
+	i = -1;
+	while (++i < table->nph && !init_mutexes(table, philos, i))
+		init_philo_data(&philos[i], table, i, n_philo);
+	return (0);
 }
 
 void	wait_philosophers(t_philo *philos)

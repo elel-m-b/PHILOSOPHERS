@@ -6,7 +6,7 @@
 #    By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 13:08:10 by elel-m-b          #+#    #+#              #
-#    Updated: 2025/08/16 20:33:10 by elel-m-b         ###   ########.fr        #
+#    Updated: 2025/08/17 10:57:52 by elel-m-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,4 +30,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY = fclean clean re all
+.PHONY: all clean fclean re

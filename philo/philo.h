@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 10:55:08 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 11:14:08 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		start_simulation(t_philo *philos);
 void	*routine(void *arg);
 void	wait_philosophers(t_philo *philos);
 int		parsing_args(char *argv[], t_table *table);
-void	init_philosophers(t_philo *philos, t_table *table);
+int		init_philosophers(t_philo *philos, t_table *table);
 int		ft_numberlen(char *s);
 int		check_args(int ac);
 long	time_now(void);
@@ -71,4 +71,6 @@ int		check_death(t_philo *philos, int i);
 int		check_meals(t_philo *philos, int *count, int i);
 int		ft_take_forks(t_philo *philo);
 int		the_last(t_philo	*philo);
+int		init_mutexes(t_table *table, t_philo *philos, int i);
+void	init_philo_data(t_philo *philo, t_table *table, int i, int n_philo);
 #endif
