@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:07:46 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/16 18:12:39 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/17 11:17:55 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_args(int ac)
 {
 	if (ac != 6 && ac != 5)
 	{
-		put_error("Error\n");
+		put_error("Invalid argumnet\n");
 		return (1);
 	}
 	return (0);
