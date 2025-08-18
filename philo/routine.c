@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 21:14:43 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/18 02:46:28 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ void	*routine(void *arg)
 {
 	t_philo	*philo;
 	t_table	*table;
-
 	philo = (t_philo *)arg;
+	pthread_mutex_lock(&philo->table->start);
+	pthread_mutex_unlock(&philo->table->start);
 	table = philo->table;
 	if (table->nph == 1)
 		return (one_philosopher(philo), NULL);
@@ -88,6 +89,9 @@ int	start_simulation(t_philo *philos)
 	int	i;
 
 	i = 0;
+	
+	pthread_mutex_init(&philos->table->start, NULL);
+	pthread_mutex_lock(&philos->table->start);
 	while (i < philos->table->nph)
 	{
 		if (pthread_create(&philos[i].threads, NULL,
@@ -95,6 +99,7 @@ int	start_simulation(t_philo *philos)
 			return (1);
 		i++;
 	}
+	pthread_mutex_unlock(&philos->table->start);
 	monitor(philos);
 	return (0);
 }
