@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/18 02:46:45 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/18 03:58:13 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_table
 	long			start_time;
 	pthread_mutex_t	mutex_death;
 	pthread_mutex_t	mutex_print;
-	pthread_mutex_t start;
+	pthread_mutex_t	start;
 }	t_table;
 
 typedef struct s_philo

@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/18 02:46:28 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/18 03:59:05 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	*routine(void *arg)
 {
 	t_philo	*philo;
 	t_table	*table;
+
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(&philo->table->start);
 	pthread_mutex_unlock(&philo->table->start);
@@ -89,7 +90,6 @@ int	start_simulation(t_philo *philos)
 	int	i;
 
 	i = 0;
-	
 	pthread_mutex_init(&philos->table->start, NULL);
 	pthread_mutex_lock(&philos->table->start);
 	while (i < philos->table->nph)
