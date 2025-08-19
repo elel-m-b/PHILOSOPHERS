@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 14:28:12 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 21:15:08 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/20 00:08:43 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	one_philosopher(t_philo *philo)
 void	ft_sleep(t_philo *philo)
 {
 	philo_message(philo, "is sleeping");
-	ft_usleep(philo->table->ts, philo);
+	usleep(philo->table->ts * 1000);
 }
 
 void	ft_think(t_philo *philo)
 {
 	philo_message(philo, "is thinking");
 	if (philo->table->nph % 2 && philo->table->te > philo->table->ts)
-		ft_usleep(philo->table->te, philo);
-	usleep(1000);
+		usleep(philo->table->te * 1000);
+	usleep(3000);
 }
 
 void	philo_message(t_philo *philo, const char *message)
@@ -64,8 +64,7 @@ int	monitor(t_philo *philos)
 			check_meals(philos, &count, i);
 			i++;
 		}
-		if (philos->table->number_of_meals > 0
-			&& count == philos->table->nph)
+		if (philos->table->number_of_meals > 0 && count == philos->table->nph)
 			return (asiigne_died(philos), 1);
 	}
 }
