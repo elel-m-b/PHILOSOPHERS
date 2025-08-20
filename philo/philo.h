@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/18 03:58:13 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/20 16:13:10 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,5 @@ int		the_last(t_philo	*philo);
 int		init_mutexes(t_table *table, t_philo *philos, int i);
 void	init_philo_data(t_philo *philo, t_table *table, int i, int n_philo);
 int		ft_usleep(long interval, t_philo *philo);
+void	destroy_all_mutexes(t_philo *philo);
 #endif

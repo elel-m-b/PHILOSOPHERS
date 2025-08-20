@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/20 00:04:30 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/20 16:16:02 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,13 @@ int	start_simulation(t_philo *philos)
 	pthread_mutex_lock(&philos->table->start);
 	while (i < philos->table->nph)
 	{
-		if (pthread_create(&philos[i].threads, NULL,
-				routine, &philos[i]))
-			return (1);
+		if (pthread_create(&philos[i].threads, NULL, routine, &philos[i]))
+		{
+			while (--i >= 0)
+				pthread_detach(philos[i].threads);
+			destroy_all_mutexes(philos);
+			return (put_error("failed to create threads\n"), 1);
+		}
 		i++;
 	}
 	pthread_mutex_unlock(&philos->table->start);
