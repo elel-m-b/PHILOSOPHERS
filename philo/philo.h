@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:45:58 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/20 16:31:25 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/20 23:21:13 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		check_args(int ac);
 long	time_now(void);
 long	ft_atoll(char *number);
 void	philo_message(t_philo *philo, const char *message);
-void	ft_sleep(t_philo *philo);
+void	ft_sleep(t_philo *philo, int time_to_sleep);
 void	ft_think(t_philo *philo);
 int		monitor(t_philo *philos);
 int		check_died(t_philo *philo);

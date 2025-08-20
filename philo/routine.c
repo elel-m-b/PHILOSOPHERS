@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 11:46:09 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/20 16:32:17 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/20 23:21:01 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->mutex_meals);
 	philo->last_meal_time = time_now();
 	pthread_mutex_unlock(&philo->mutex_meals);
-	usleep(table->te * 1000);
+	ft_usleep(table->te, philo);
 	ft_unlock(philo);
 	return (0);
 }
@@ -43,12 +43,12 @@ void	*routine(void *arg)
 	if (table->nph == 1)
 		return (one_philosopher(philo), NULL);
 	if (philo->id % 2 == 0)
-		usleep(1000);
+		usleep(5000);
 	while (!check_died(philo))
 	{
 		if (ft_eat(philo))
 			return (NULL);
-		ft_sleep(philo);
+		ft_sleep(philo, table->ts);
 		ft_think(philo);
 	}
 	return (NULL);

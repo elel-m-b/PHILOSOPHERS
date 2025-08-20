@@ -1,0 +1,9 @@
+- data race
+- race condition
+- deadlock
+- shared memory
+- pthread_detach
+- odd vs even
+- thinking
+- mutex used in philo
+- theorique staffs ( algo of sheduling + context switching + cpu and How it read data + makefile)

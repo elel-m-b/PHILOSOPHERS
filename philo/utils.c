@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 13:07:46 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/17 21:19:58 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/20 23:14:53 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@ int	ft_usleep(long interval, t_philo *philo)
 	long	now;
 
 	now = time_now();
-	while (time_now() - now < interval)
-	{
-		if (check_died(philo))
-			return (1);
-		usleep(300);
-	}
+	while (!check_died(philo) && (time_now() - now) <= interval)
+		usleep(100);
 	return (0);
 }
 
