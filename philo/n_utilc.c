@@ -6,7 +6,7 @@
 /*   By: elel-m-b <elel-m-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 18:28:14 by elel-m-b          #+#    #+#             */
-/*   Updated: 2025/08/20 16:34:42 by elel-m-b         ###   ########.fr       */
+/*   Updated: 2025/08/21 05:35:00 by elel-m-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	check_death(t_philo *philos, int i)
 	pthread_mutex_lock(&(philos[i].mutex_meals));
 	if (time_now() - philos[i].last_meal_time >= philos[i].table->td)
 	{
+		asiigne_died(philos);
 		pthread_mutex_lock(&(philos[i].table->mutex_print));
 		printf("%ld %d %s\n", time_now()
 			- philos->table->start_time, philos->id, "died");
 		pthread_mutex_unlock(&(philos[i].table->mutex_print));
-		asiigne_died(philos);
 		pthread_mutex_unlock(&(philos[i].mutex_meals));
 		return (1);
 	}
