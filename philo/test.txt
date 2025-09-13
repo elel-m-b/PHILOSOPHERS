@@ -1,9 +1,17 @@
-- data race
-- race condition
-- deadlock
-- shared memory
-- pthread_detach
-- odd vs even
-- similation .. (eating + sleeping + thinking )
-- 199/599/200/200 why is not work ????
-- theorique staffs ( CPU Scheduling Algorithms + Context Switching + How the CPU Reads Data (The Memory Hierarchy <-> The Fetch-Decode-Execute Cycle ) + Process Synchronization & Concurrency Control +           Mutex (Mutual Exclusion) HOW it work ? Virtual Memory & Paging + System Call Interface (The Bridge) + process creation + threads creation all that concept also How pthread function work behind the           sence..))
+--------------------------------------------------- plan ---------------------------------------------------------
+
+Data race
+Race condition
+Deadlock
+Shared memory
+pthread_detach
+Odd vs. even
+Simulation: eating, sleeping, thinking
+"199/599/200/200" — why does this not work?
+Theoretical topics:
+CPU Scheduling Algorithms
+Context Switching
+How the CPU Reads Data (The Memory Hierarchy ↔ The Fetch-Decode-Execute Cycle)
+Process Synchronization & Concurrency Control
+[...]
+
