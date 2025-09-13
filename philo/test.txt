@@ -4,6 +4,6 @@
 - shared memory
 - pthread_detach
 - odd vs even
-- thinking
-- mutex used in philo
-- theorique staffs ( algo of sheduling + context switching + cpu and How it read data + makefile)
+- similation .. (eating + sleeping + thinking )
+- 199/599/200/200 why is not work ????
+- theorique staffs ( CPU Scheduling Algorithms + Context Switching + How the CPU Reads Data (The Memory Hierarchy <-> The Fetch-Decode-Execute Cycle ) + Process Synchronization & Concurrency Control +           Mutex (Mutual Exclusion) HOW it work ? Virtual Memory & Paging + System Call Interface (The Bridge) + process creation + threads creation all that concept also How pthread function work behind the           sence..))
