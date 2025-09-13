@@ -1,3 +1,5 @@
+![Philosophers Problem](https://imgs.search.brave.com/LfZKEw4KsFxGcIC11-ev2xGudRMKaS9UNhcUx7gltt0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy84/LzgxL0RpbmluZ19w/aGlsb3NvcGhlcnNf/ZGlhZ3JhbS5qcGc)
+
 # Philosophers 42 (The Dining Philosophers Problem)
 
 This project is a solution to the famous "Dining Philosophers" problem, created as part of the 42 school curriculum. The challenge focuses on concurrency, process synchronization, and avoiding deadlocks — essential topics in systems programming.
@@ -64,6 +66,17 @@ Five philosophers sit around a table, each alternating between thinking and eati
 - Accurate timing and event logging.
 
 ## 👤 Author
+
+- [elel-m-b](https://github.com/elel-m-b)
+
+## 📚 References
+
+- [Dining Philosophers Problem - Wikipedia](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
+- [42 School Subject PDF](https://cdn.intra.42.fr/pdf/pdf/36658/en.subject.pdf)
+
+---
+
+Feel free to open issues or submit pull requests for improvements!
 
 - [elel-m-b](https://github.com/elel-m-b)
 
