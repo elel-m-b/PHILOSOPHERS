@@ -1,4 +1,12 @@
-![Philosophers Problem](https://imgs.search.brave.com/LfZKEw4KsFxGcIC11-ev2xGudRMKaS9UNhcUx7gltt0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy84/LzgxL0RpbmluZ19w/aGlsb3NvcGhlcnNf/ZGlhZ3JhbS5qcGc)
+<div align="center">
+  <img 
+    src="https://github.com/user-attachments/assets/bf786fab-8f65-4a58-9f10-e4a0fcb2583f" 
+    alt="Philosophers Problem"
+    width="800"
+  />
+</div>
+
+
 
 # Philosophers 42 (The Dining Philosophers Problem)
 
