@@ -2,7 +2,7 @@
   <img 
     src="https://github.com/user-attachments/assets/bf786fab-8f65-4a58-9f10-e4a0fcb2583f" 
     alt="Philosophers Problem"
-    width="800"
+    width="900"
   />
 </div>
 
