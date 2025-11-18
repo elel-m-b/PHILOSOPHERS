@@ -7,9 +7,7 @@
 </div>
 
 
-
-
-# Philosophers 42 (The Dining Philosophers Problem)
+<h1 align="center"> Philosophers 42 (The Dining Philosophers Problem) </h1>
 
 This project is a solution to the famous "Dining Philosophers" problem, created as part of the 42 school curriculum. The challenge focuses on concurrency, process synchronization, and avoiding deadlocks — essential topics in systems programming.
 
@@ -24,20 +22,13 @@ Five philosophers sit around a table, each alternating between thinking and eati
 - **Concurrency:** pthreads (POSIX threads)
 - **Synchronization:** Mutexes for forks, and additional mutexes for synchronized printing and death detection.
 
-## 📦 Files
-
-- `philo.c` - Main program logic and initialization.
-- `philo.h` - Header file with struct and function declarations.
-- `actions.c` - Philosopher routines (eat, think, sleep).
-- `utils.c` - Utility functions (time, error handling).
-- `Makefile` - Build automation.
 
 ## 🛠️ Installation and Usage
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/elel-m-b/the_dining_philosophers_problem_solution.git
-   cd the_dining_philosophers_problem_solution
+   git clone https://github.com/elel-m-b/dining-philosophers
+   cd dining-philosophers
    ```
 
 2. **Compile the project:**
