@@ -1,10 +1,12 @@
-<div align="center">
-  <img 
-    src="https://github.com/user-attachments/assets/bf786fab-8f65-4a58-9f10-e4a0fcb2583f" 
-    alt="Philosophers Problem"
-    style="width: 100%; max-width: 1200px; height: auto; border-radius: 8px;"
-  />
+<div align="center" style="width: 100%; max-width: 1200px; height: auto; border-radius: 8px;">
+  <!-- Grade image -->
+  <img src="img/grade.png" alt="Grade Image" style="width: 100%; height: auto; border-radius: 8px;">
+
+  <h1>🌐 NetPractice Made Simple</h1>
+  <p><em>This project has been created as part of the 42 curriculum by elel-m-b</em></p>
+  <hr>
 </div>
+
 
 
 <h1 align="center"> Philosophers 42 (The Dining Philosophers Problem) </h1>
